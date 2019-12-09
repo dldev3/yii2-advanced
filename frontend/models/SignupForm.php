@@ -13,6 +13,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $first_name;
+    public $last_name;
 
 
     /**
@@ -34,6 +36,12 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['first_name', 'required', 'message' => 'Have to fill this Field'],
+
+            ['last_name', 'required'],
+
+
         ];
     }
 
@@ -51,6 +59,8 @@ class SignupForm extends Model
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
