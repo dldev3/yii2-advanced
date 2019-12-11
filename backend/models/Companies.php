@@ -11,11 +11,11 @@ use Yii;
  * @property string $company_name
  * @property string $company_email
  * @property string $company_address
- * @property string $company_created_date
+ * @property string $compnay_created_date
  * @property string $company_status
  *
- * @property Branches $company
- * @property Departments $company0
+ * @property Branches[] $branches
+ * @property Departments[] $departments
  */
 class Companies extends \yii\db\ActiveRecord
 {
@@ -34,11 +34,9 @@ class Companies extends \yii\db\ActiveRecord
     {
         return [
             [['company_name', 'company_email', 'company_address', 'company_status'], 'required'],
-            [['company_address', 'company_status'], 'string'],
-            [['company_created_date'], 'safe'],
-            [['company_name', 'company_email'], 'string', 'max' => 255],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branches::className(), 'targetAttribute' => ['company_id' => 'companies_company_id']],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['company_id' => 'companies_company_id']],
+            [['compnay_created_date'], 'safe'],
+            [['company_status'], 'string'],
+            [['company_name', 'company_email', 'company_address'], 'string', 'max' => 100],
         ];
     }
 
@@ -52,7 +50,7 @@ class Companies extends \yii\db\ActiveRecord
             'company_name' => 'Company Name',
             'company_email' => 'Company Email',
             'company_address' => 'Company Address',
-            'company_created_date' => 'Company Created Date',
+            'compnay_created_date' => 'Compnay Created Date',
             'company_status' => 'Company Status',
         ];
     }
@@ -60,16 +58,16 @@ class Companies extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCompany()
+    public function getBranches()
     {
-        return $this->hasOne(Branches::className(), ['companies_company_id' => 'company_id']);
+        return $this->hasMany(Branches::className(), ['companies_company_id' => 'company_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCompany0()
+    public function getDepartments()
     {
-        return $this->hasOne(Departments::className(), ['companies_company_id' => 'company_id']);
+        return $this->hasMany(Departments::className(), ['companies_company_id' => 'company_id']);
     }
 }

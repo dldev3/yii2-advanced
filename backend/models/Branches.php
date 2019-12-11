@@ -14,9 +14,8 @@ use Yii;
  * @property string $branch_created_date
  * @property string $branch_status
  *
- * @property Departments $branch
- * @property Companies $companies
- * @property Departments[] $companies0
+ * @property Companies $companiesCompany
+ * @property Departments[] $departments
  */
 class Branches extends \yii\db\ActiveRecord
 {
@@ -36,10 +35,10 @@ class Branches extends \yii\db\ActiveRecord
         return [
             [['companies_company_id', 'branch_name', 'branch_address', 'branch_status'], 'required'],
             [['companies_company_id'], 'integer'],
-            [['branch_address', 'branch_status'], 'string'],
             [['branch_created_date'], 'safe'],
-            [['branch_name'], 'string', 'max' => 100],
-            [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Departments::className(), 'targetAttribute' => ['branch_id' => 'branches_branch_id']],
+            [['branch_status'], 'string'],
+            [['branch_name', 'branch_address'], 'string', 'max' => 100],
+            [['companies_company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::className(), 'targetAttribute' => ['companies_company_id' => 'company_id']],
         ];
     }
 
@@ -61,15 +60,7 @@ class Branches extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBranch()
-    {
-        return $this->hasOne(Departments::className(), ['branches_branch_id' => 'branch_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCompanies()
+    public function getCompaniesCompany()
     {
         return $this->hasOne(Companies::className(), ['company_id' => 'companies_company_id']);
     }
@@ -77,8 +68,8 @@ class Branches extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCompanies0()
+    public function getDepartments()
     {
-        return $this->hasMany(Departments::className(), ['companies_company_id' => 'company_id'])->viaTable('companies', ['company_id' => 'companies_company_id']);
+        return $this->hasMany(Departments::className(), ['branches_branch_id' => 'branch_id']);
     }
 }
