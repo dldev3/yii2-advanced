@@ -10,6 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Branches';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="branches-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -26,8 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'branch_id',
-            'companies_company_id',
+            'companiesCompany.company_name',
             'branch_name',
             'branch_address',
             'branch_created_date',
