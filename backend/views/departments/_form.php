@@ -27,9 +27,6 @@ use yii\widgets\ActiveForm;
              ['prompt' => 'Select Company']
     );  ?>
 
-
-
-
     <?= $form->field($model, 'department_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'department_status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => 'Status']) ?>
