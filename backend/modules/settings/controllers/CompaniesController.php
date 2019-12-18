@@ -124,4 +124,11 @@ class CompaniesController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /*this function is for testing this class*/
+    public function useless(){
+        return 'This does nothing!';
+    }
 }
+
+
