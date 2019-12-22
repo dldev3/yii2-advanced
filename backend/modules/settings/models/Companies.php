@@ -2,8 +2,6 @@
 
 namespace backend\modules\settings\models;
 
-use backend\models\Branches;
-use backend\models\Departments;
 use Yii;
 
 /**
@@ -35,7 +33,7 @@ class Companies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company_name', 'company_email', 'company_address', 'company_status'], 'required'],
+            [['company_name', 'company_email', 'company_address','company_status'], 'required'],
             [['compnay_created_date'], 'safe'],
             [['company_status'], 'string'],
             [['company_name', 'company_email', 'company_address'], 'string', 'max' => 100],
