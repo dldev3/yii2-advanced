@@ -18,7 +18,7 @@ class CompaniesSearch extends Companies
     {
         return [
             [['company_id'], 'integer'],
-            [['company_name', 'company_email', 'company_address', 'compnay_created_date', 'company_status'], 'safe'],
+            [['company_name', 'company_email', 'company_address', 'company_start_date', 'compnay_created_date', 'company_status'], 'safe'],
         ];
     }
 
@@ -59,6 +59,7 @@ class CompaniesSearch extends Companies
         // grid filtering conditions
         $query->andFilterWhere([
             'company_id' => $this->company_id,
+            'company_start_date' => $this->company_start_date,
             'compnay_created_date' => $this->compnay_created_date,
         ]);
 
