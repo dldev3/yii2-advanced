@@ -19,7 +19,7 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'company_address')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'company_start_date')->widget(
+    <?= $form->field($model, 'compnay_created_date')->widget(
         DatePicker::className(), [
         // inline too, not bad
         'inline' => false,
@@ -27,11 +27,10 @@ use dosamigos\datepicker\DatePicker;
         //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
         'clientOptions' => [
             'autoclose' => true,
-            'format' => 'dd-M-yyyy'
+            'format' => 'yyyy-M-dd'
         ]
     ]);?>
 
-    <?= $form->field($model, 'compnay_created_date')->textInput() ?>
 
     <?= $form->field($model, 'company_status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
 
